@@ -1,7 +1,6 @@
+//sizeOutOfRangeException.h
 #ifndef SIZE_OUT_OF_RANGE_EXCEPTION_H
 #define SIZE_OUT_OF_RANGE_EXCEPTION_H
-
-//sizeOutOfRangeException.h
 
 #include <stdexcept>
 #include <string>

@@ -1,4 +1,4 @@
-// conversationManager
+// conversationManager.cpp
 
 
 #include "conversationManager.h"

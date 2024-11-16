@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {
 
-	int convoCap = 3;
+	int convoCap = 11;
 
 	conversationManager** listConvo = new conversationManager * [convoCap];
 

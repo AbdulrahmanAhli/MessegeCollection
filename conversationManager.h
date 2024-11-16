@@ -1,7 +1,7 @@
 #ifndef CONVERSATION_MANAGER_H
 #define CONVERSATION_MANAGER_H
 
-// conversationManager.cpp
+// conversationManager.h
 
 #include "linkedList.h"
 #include <string>

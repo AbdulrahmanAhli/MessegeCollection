@@ -1,5 +1,7 @@
-#pragma once
+#ifndef MESSAGE_H
+#define MESSAGE_H
 
+// message.h
 
 /// <summary>
 /// this will connect to the organizer so that it can organizer based on the following info
@@ -9,28 +11,22 @@
 /// </summary>
 
 #include <string>
-using namespace std;
 
-class message
-{
-public:
-	message();
-
-	// setting all of the data
-	void setAll(const int fragNum, const int convID, string msgCont);
-
-	// getters to update and get the data
-	const int getFrag() const;
-	const int getConvID() const;
-	const string getMsg() const;
-
-
+class message {
 private:
+    int fragmentNumber;
+    int conversationID;
+    std::string messageContent;
 
-	int fragmentNumber; // the number of fragment's
-	int conversationID; // this will have the ID of the fragment
-	string messageContent; // this will hold the random messeges
+public:
+    message(); // Default constructor
 
+    void setAll(int fragNum, int convID, const std::string& msgCont);
 
+    // Getters
+    int getFrag() const;
+    int getConvID() const;
+    std::string getMsg() const;
 };
 
+#endif // MESSAGE_H

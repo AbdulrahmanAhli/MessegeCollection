@@ -39,6 +39,9 @@
     <ClCompile Include="conversationManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sizeOutOfRangeException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="organiser.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="conversationManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sizeOutOfRangeException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

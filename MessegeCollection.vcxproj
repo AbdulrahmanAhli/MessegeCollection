@@ -135,6 +135,7 @@
     <ClCompile Include="node.cpp" />
     <ClCompile Include="organiser.cpp" />
     <ClCompile Include="queue.cpp" />
+    <ClCompile Include="sizeOutOfRangeException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="conversationManager.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="node.h" />
     <ClInclude Include="organiser.h" />
     <ClInclude Include="queue.h" />
+    <ClInclude Include="sizeOutOfRangeException.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

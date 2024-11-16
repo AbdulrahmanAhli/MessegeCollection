@@ -1,45 +1,56 @@
+// queue.cpp
+
 #include "queue.h"
 
-template<typename T>
-inline queue<T>::queue() {  qList = new linkedList<T>; }
-
-template<typename T>
-inline queue<T>::~queue() { while (!qList->emptyLinkedList()) dequeue(); }
-
-template<typename T>
-inline int queue<T>::sizeQueue() const { return qList->sizeOfList(); }
-
-template<typename T>
-inline bool queue<T>::emptyQueue() const { return qList->emptyLinkedList(); }
-
-template<typename T>
-inline const T queue<T>::frontData() const throw(emptyContainer) {
-
-	if (emptyQueue()) throw(emptyContainer("the queue is empty\n"));
-	return qList->headData();
+template <typename T>
+queue<T>::queue() {
+    qList = new linkedList<T>(); // Allocate memory for the linked list
 }
 
-template<typename T>
-inline const T queue<T>::rearData() const throw(emptyContainer) {
-
-	if (emptyQueue()) throw(emptyContainer("the queue is empty\n"));
-	return qList->tailData();
+template <typename T>
+queue<T>::~queue() {
+    // Properly delete all elements and deallocate the list
+    delete qList;
 }
 
-template<typename T>
-inline void queue<T>::enqueue(const T newData) { qList->addBack(newData); }
-
-template<typename T>
-inline const T queue<T>::dequeue() throw(emptyContainer) {
-
-	if (emptyQueue()) throw (emptyContainer("the queue is empty\n"));
-
-	T temp = qList->headData();
-	qList->addFront();
-	return temp;
+template <typename T>
+int queue<T>::sizeQueue() const {
+    return qList->sizeOfList(); // Use sizeOfList() from linkedList
 }
 
+template <typename T>
+bool queue<T>::emptyQueue() const {
+    return qList->emptyLinkedList(); // Use emptyLinkedList() from linkedList
+}
 
+template <typename T>
+const T queue<T>::frontData() const {
+    if (emptyQueue()) {
+        throw emptyContainer("The queue is empty\n");
+    }
+    return qList->headData(); // Access head data from linkedList
+}
 
+template <typename T>
+const T queue<T>::rearData() const {
+    if (emptyQueue()) {
+        throw emptyContainer("The queue is empty\n");
+    }
+    return qList->tailData(); // Access tail data from linkedList
+}
 
+template <typename T>
+void queue<T>::enqueue(const T newData) {
+    qList->addBack(newData); // Add element at the back
+}
 
+template <typename T>
+const T queue<T>::dequeue() {
+    if (emptyQueue()) {
+        throw emptyContainer("The queue is empty\n");
+    }
+
+    T temp = qList->headData(); // Store the front data
+    qList->removeFront();       // Remove the front element
+    return temp;                // Return the stored data
+}

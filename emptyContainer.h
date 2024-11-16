@@ -1,11 +1,14 @@
-#pragma once
-#include <iostream>
-#include <stdexcept>
-using namespace std;
+#ifndef EMPTY_CONTAINER_H
+#define EMPTY_CONTAINER_H
 
-class emptyContainer : public runtime_error
-{
+
+
+#include <stdexcept>
+#include <string>
+
+class emptyContainer : public std::runtime_error {
 public:
-	emptyContainer(string err) : runtime_error(err) {}
+    explicit emptyContainer(const std::string& err);
 };
 
+#endif // EMPTY_CONTAINER_H

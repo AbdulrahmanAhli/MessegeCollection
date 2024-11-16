@@ -1,11 +1,4 @@
-#pragma once
-#include <iostream>
-#include <stdexcept>
-using namespace std;
+#include "emptyContainer.h"
 
-class emptyContainer : public runtime_error
-{
-public:
-	emptyContainer(string err) : runtime_error(err) {}
-};
-
+emptyContainer::emptyContainer(const std::string& err)
+    : std::runtime_error(err) {}

@@ -67,9 +67,10 @@ void organiser::addFragment(queue<message>* qList, int N) {
         ++count;
 
         // Debug output
+        /*
         std::cout << "Enqueued fragment: Conversation " << convID
             << ", Fragment " << fragNumber
-            << ", Message: " << text << std::endl;
+            << ", Message: " << text << std::endl;*/
     }
 }
 
@@ -111,12 +112,12 @@ void organiser::buildConvo(queue<message>* qList, conversationManager**& list, i
             if (currentMessage.getReenqueueCount() <= MAX_REENQUEUE_COUNT) {
                 qList->enqueue(currentMessage);  // Re-enqueue the fragment
             }
-            else {
+            /*else {
                 std::cerr << "Discarding fragment " << currentMessage.getFrag()
                     << " of Conversation " << convID
                     << " after " << MAX_REENQUEUE_COUNT << " attempts." << std::endl;
                 // Optionally, handle the incomplete conversation
-            }
+            }*/
         }
 
         processedFragments++;

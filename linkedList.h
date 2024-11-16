@@ -71,7 +71,7 @@ void linkedList<T>::addFront(const T newData) {
 template <typename T>
 void linkedList<T>::removeFront() {
     if (emptyLinkedList()) {
-        throw emptyContainer("List is Empty\n");
+        throw emptyContainer();
     }
 
     node<T>* temp = head;
@@ -105,7 +105,7 @@ void linkedList<T>::addBack(const T newData) {
 template <typename T>
 void linkedList<T>::print() const {
     if (emptyLinkedList()) {
-        throw emptyContainer("The list is Empty\n");
+        throw emptyContainer();
     }
 
     node<T>* temp = head;
@@ -118,7 +118,7 @@ void linkedList<T>::print() const {
 template <typename T>
 inline const T linkedList<T>::headData() const {
     if (emptyLinkedList()) {
-        throw emptyContainer("The list is Empty\n");
+        throw emptyContainer();
     }
     return head->nodeGetData();
 }
@@ -126,7 +126,7 @@ inline const T linkedList<T>::headData() const {
 template <typename T>
 inline const T linkedList<T>::tailData() const {
     if (emptyLinkedList()) {
-        throw emptyContainer("The list is Empty\n");
+        throw emptyContainer();
     }
     return tail->nodeGetData();
 }

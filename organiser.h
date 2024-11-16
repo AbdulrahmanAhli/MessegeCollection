@@ -5,23 +5,26 @@
 
 #include <fstream>
 #include <string>
+#include <vector>
 #include "queue.h"
 #include "message.h"
 #include "conversationManager.h"
+
 
 class organiser {
 private:
     std::ifstream inputFile;
     std::ofstream outputFile;
+    std::ofstream csvFile;
 
 public:
-    // Constructor: Opens the input file
-    explicit organiser(const std::string& inputFileName, const std::string& outputFileName);
+    // Constructor: Opens the input file and output file
+    organiser(const std::string& inputFileName, const std::string& outputFileName, const std::string& csvFileName);
 
-    ~organiser()
+    ~organiser();
 
     // Adds a fragment to the queue
-    void addFragment(queue<message>* qList);
+    void addFragment(queue<message>* qList, int N);
 
     // Builds conversations from the queue
     void buildConvo(queue<message>* qList, conversationManager**& list, int& size);
@@ -29,11 +32,10 @@ public:
     // Resizes the array of conversation managers
     void resizeArray(conversationManager**& listArray, int& size, int newSize);
 
-    // Constructor: Opens the input file and output file
-    explicit organiser(const std::string& inputFileName, const std::string& outputFileName);
-
     // Prints all conversations
     void print(conversationManager* list[], int size);
+
+    bool isFileEnd() const;
 };
 
 #endif // ORGANISER_H

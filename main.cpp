@@ -2,47 +2,60 @@
 
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
-#include <ctime>
-
-#include <sstream>
-
+#include <cstdlib>  // For srand and rand
+#include <ctime>    // For time
 #include "queue.h"
 #include "conversationManager.h"
 #include "organiser.h"
-
-using namespace std;
-
+#include "message.h"
 
 int main() {
+    // Initialize random seed
+    srand(static_cast<unsigned int>(time(0)));
 
-	int convoCap = 11;
+    // Define initial capacity for the conversation manager array
+    const int INITIAL_CAPACITY = 11;
+    int convoCap = INITIAL_CAPACITY;
 
-	conversationManager** listConvo = new conversationManager * [convoCap];
+    // Create and initialize the conversation manager array
+    conversationManager** listConvo = new conversationManager * [convoCap];
+    for (int i = 0; i < convoCap; ++i) {
+        listConvo[i] = nullptr;  // Initialize to nullptr
+    }
 
-	for (auto i = 0; i < convoCap; i++)
-	{
-		listConvo[i] = new conversationManager;
-	}
+    // Create the message queue
+    queue<message>* qList = new queue<message>;
 
-	queue <message>* qList = new queue<message>;
+    try {
+        // Instantiate the organiser with input and output file names
+        organiser org("convo.txt", "output.txt", "conversations.csv");
 
-	organiser org("convo.txt");
+        // Main processing loop
+        while (!org.isFileEnd() || !qList->emptyQueue()) {
+            int N = rand() % 5 + 1;  // Random N between 1 and 5
+            if (!org.isFileEnd()) {
+                org.addFragment(qList, N);
+            }
 
-	org.addFragment(qList);
+            // Build conversations from the queued messages
+            org.buildConvo(qList, listConvo, convoCap);
 
-	while (!qList->emptyQueue()) {
-		org.buildConvo(qList, listConvo, convoCap);
-	}
+            // Generate outputs
+            org.print(listConvo, convoCap);
+        }
+    }
+    catch (const std::exception& ex) {
+        std::cerr << "An error occurred: " << ex.what() << std::endl;
+    }
 
-	org.print(listConvo, convoCap);
+    // Cleanup
+    for (int i = 0; i < convoCap; ++i) {
+        if (listConvo[i] != nullptr) {
+            delete listConvo[i];
+        }
+    }
+    delete[] listConvo;
+    delete qList;
 
-	for (auto i = 0; i < convoCap; i++)
-	{
-		delete listConvo[i];
-	}
-	delete[] listConvo;
-
-
-	return 0;
+    return 0;
 }

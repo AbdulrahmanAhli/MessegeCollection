@@ -16,6 +16,7 @@ class message {
 private:
     int fragmentNumber;
     int conversationID;
+    int reenqueueCount;
     std::string messageContent;
 
 public:
@@ -27,6 +28,10 @@ public:
     int getFrag() const;
     int getConvID() const;
     std::string getMsg() const;
+
+    void incrementReenqueueCount();
+    int getReenqueueCount() const;
+
 };
 
 #endif // MESSAGE_H

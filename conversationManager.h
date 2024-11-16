@@ -1,11 +1,13 @@
 #ifndef CONVERSATION_MANAGER_H
 #define CONVERSATION_MANAGER_H
 
-// conversationManager.h
+// conversationManager.cpp
 
 #include "linkedList.h"
 #include <string>
-using namespace std;
+#include <ostream>
+#include<vector>
+
 
 /// <summary>
 /// this class is responsible of the management of the conversations
@@ -21,9 +23,11 @@ public:
     conversationManager(int convID); // Constructor
     ~conversationManager(); // Destructor
 
-    int getNumFrag() const; // Getter for number of fragments
-    void addBackOfList(const string& newData); // Add to the back of the list
-    void print() const; // Print the conversation list
+    int getNumFrag() const;
+    int getConvID() const;
+    void addBackOfList(const std::string& newData);
+    void print(std::ostream& os) const; // Accept output stream
+    std::vector<std::string> getFragments() const;
 };
 
 #endif // CONVERSATION_MANAGER_H

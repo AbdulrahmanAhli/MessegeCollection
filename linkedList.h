@@ -2,6 +2,7 @@
 #pragma once
 #include <iostream>
 #include <sstream>
+#include <vector>
 #include "node.h"
 #include "emptyContainer.h"
 #include "linkedList.cpp"
@@ -23,6 +24,7 @@ public:
 
 	void print() const throw(emptyContainer);
     std::string concatenate() const;
+    std::vector<T> toVector() const;
 
 
 	const T headData() const throw (emptyContainer);
@@ -58,7 +60,7 @@ inline linkedList<T>::~linkedList() {
 
 template <typename T>
 bool linkedList<T>::emptyLinkedList() const {
-    return head == nullptr;
+    return head == NULL;
 }
 
 template <typename T>
@@ -155,6 +157,17 @@ std::string linkedList<T>::concatenate() const {
         temp = temp->next;
     }
     return oss.str();
+}
+
+template <typename T>
+std::vector<T> linkedList<T>::toVector() const {
+    std::vector<T> elements;
+    node<T>* temp = head;
+    while (temp != nullptr) {
+        elements.push_back(temp->data);
+        temp = temp->next;
+    }
+    return elements;
 }
 
 

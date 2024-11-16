@@ -1,35 +1,34 @@
-//organiser.h
-#pragma once
-#include<iostream>
-#include<fstream>
-#include<string>
+#ifndef ORGANISER_H
+#define ORGANISER_H
 
-#include "conversationManager.h"
+//organiser.h
+
+#include <fstream>
+#include <string>
 #include "queue.h"
 #include "message.h"
+#include "conversationManager.h"
 
-using namespace std;
-
-
-
-class organiser : public queue<message>, message, conversationManager
-{
+class organiser {
+private:
+    std::ifstream inputFile;
 
 public:
-	organiser(string fileName);
+    // Constructor: Opens the input file
+    explicit organiser(const std::string& fileName);
 
-	void addFragment(queue<message> * qList); // this will read and add a fragment to the list
+    // Adds a fragment to the queue
+    void addFragment(queue<message>* qList);
 
-	void buildConvo(queue<message>* qList, conversationManager**& list, int& size);
+    // Builds conversations from the queue
+    void buildConvo(queue<message>* qList, conversationManager**& list, int& size);
 
-	void resizeArray(conversationManager**& listArray, int& size, int& newSize);
+    // Resizes the array of conversation managers
+    void resizeArray(conversationManager**& listArray, int& size, int newSize);
 
-	void print(conversationManager* list[], int size);
-
-
-private:
-	ifstream inputFile;
-
-
+    // Prints all conversations
+    void print(conversationManager* list[], int size) const;
 };
+
+#endif // ORGANISER_H
 

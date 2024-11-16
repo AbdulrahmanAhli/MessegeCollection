@@ -2,10 +2,10 @@
 #include "linkedList.h"
 
 template <typename T>
-inline linkedList<T>::linkedList() : head(nullptr), tail(nullptr), size(0) {}
+ linkedList<T>::linkedList() : head(nullptr), tail(nullptr), size(0) {}
 
 template <typename T>
-inline linkedList<T>::~linkedList() {
+ linkedList<T>::~linkedList() {
     while (!emptyLinkedList()) {
         removeFront();
     }
@@ -76,7 +76,7 @@ void linkedList<T>::print() const {
 }
 
 template <typename T>
-inline const T linkedList<T>::headData() const {
+ const T linkedList<T>::headData() const {
     if (emptyLinkedList()) {
         throw emptyContainer("The list is Empty\n");
     }
@@ -84,7 +84,7 @@ inline const T linkedList<T>::headData() const {
 }
 
 template <typename T>
-inline const T linkedList<T>::tailData() const {
+ const T linkedList<T>::tailData() const {
     if (emptyLinkedList()) {
         throw emptyContainer("The list is Empty\n");
     }
@@ -92,6 +92,6 @@ inline const T linkedList<T>::tailData() const {
 }
 
 template <typename T>
-inline const int linkedList<T>::sizeOfList() const {
+ const int linkedList<T>::sizeOfList() const {
     return size;
 }

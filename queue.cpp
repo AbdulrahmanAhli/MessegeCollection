@@ -3,15 +3,10 @@
 #include "queue.h"
 
 template <typename T>
-queue<T>::queue() {
-    qList = new linkedList<T>(); // Allocate memory for the linked list
-}
+queue<T>::queue() { qList = new linkedList<T>(); } // Allocate memory for the linked list
 
 template <typename T>
-queue<T>::~queue() {
-    // Properly delete all elements and deallocate the list
-    delete qList;
-}
+queue<T>::~queue() { delete qList; }
 
 template <typename T>
 int queue<T>::sizeQueue() const {
@@ -46,11 +41,11 @@ void queue<T>::enqueue(const T newData) {
 
 template <typename T>
 const T queue<T>::dequeue() {
-    if (emptyQueue()) {
-        throw emptyContainer("The queue is empty\n");
-    }
+    if (qList->emptyLinkedList()) throw emptyContainer("The queue is empty\n"); 
 
-    T temp = qList->headData(); // Store the front data
+    T frontData = qList->headData(); // Store the front data
     qList->removeFront();       // Remove the front element
-    return temp;                // Return the stored data
+    return frontData;                // Return the stored data
+
+
 }

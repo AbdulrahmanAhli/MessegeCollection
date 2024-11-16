@@ -40,9 +40,11 @@ int main() {
             // Build conversations from the queued messages
             org.buildConvo(qList, listConvo, convoCap);
 
-            // Generate outputs
-            org.print(listConvo, convoCap);
+            // Remove the print call from inside the loop
         }
+
+        // After processing all fragments, print the final conversations
+        org.print(listConvo, convoCap);
     }
     catch (const std::exception& ex) {
         std::cerr << "An error occurred: " << ex.what() << std::endl;
@@ -59,3 +61,4 @@ int main() {
 
     return 0;
 }
+

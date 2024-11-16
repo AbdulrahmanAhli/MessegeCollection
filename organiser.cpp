@@ -6,10 +6,25 @@
 #include <iostream>
 #include <vector>
 
-organiser::organiser(const std::string& fileName) {
-    inputFile.open(fileName);
+
+organiser::organiser(const std::string& inputFileName, const std::string& outputFileName) {
+    inputFile.open(inputFileName);
     if (!inputFile) {
-        throw std::runtime_error("Failed to open file: " + fileName);
+        throw std::runtime_error("Failed to open input file: " + inputFileName);
+    }
+
+    outputFile.open(outputFileName);
+    if (!outputFile) {
+        throw std::runtime_error("Failed to open output file: " + outputFileName);
+    }
+}
+
+organiser::~organiser() {
+    if (inputFile.is_open()) {
+        inputFile.close();
+    }
+    if (outputFile.is_open()) {
+        outputFile.close();
     }
 }
 
@@ -82,12 +97,12 @@ void organiser::resizeArray(conversationManager**& listArray, int& size, int new
     listArray = temp;
 }
 
-void organiser::print(conversationManager* list[], int size) const {
+// Modify the print method
+void organiser::print(conversationManager* list[], int size) {
     for (int i = 0; i < size; ++i) {
         if (list[i]->getNumFrag() > 0) {
-            std::cout << "Conversation " << i + 1 << ":\n";
-            list[i]->print();
-            std::cout << "\n";
+            list[i]->print(outputFile); // Pass outputFile to print method
+            outputFile << "\n";
         }
     }
 }

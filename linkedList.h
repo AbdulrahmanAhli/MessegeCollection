@@ -1,6 +1,7 @@
 // linkedList.h
 #pragma once
 #include <iostream>
+#include <sstream>
 #include "node.h"
 #include "emptyContainer.h"
 #include "linkedList.cpp"
@@ -21,10 +22,14 @@ public:
 	void addBack(const T newData);
 
 	void print() const throw(emptyContainer);
+    std::string concatenate() const;
+
 
 	const T headData() const throw (emptyContainer);
 	const T tailData()const throw (emptyContainer);
 	const int sizeOfList() const;
+
+ 
 
 private:
 
@@ -62,7 +67,7 @@ void linkedList<T>::addFront(const T newData) {
     newNode->next = head;
     head = newNode;
 
-    if (size == 0) { // Correctly set tail for an initially empty list
+    if (size == 0) { 
         tail = head;
     }
     ++size;
@@ -134,6 +139,22 @@ inline const T linkedList<T>::tailData() const {
 template <typename T>
 inline const int linkedList<T>::sizeOfList() const {
     return size;
+}
+
+
+template <typename T>
+std::string linkedList<T>::concatenate() const {
+    if (emptyLinkedList()) {
+        throw emptyContainer("The list is empty.\n");
+    }
+
+    std::ostringstream oss;
+    node<T>* temp = head;
+    while (temp != nullptr) {
+        oss << temp->data;
+        temp = temp->next;
+    }
+    return oss.str();
 }
 
 

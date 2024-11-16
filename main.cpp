@@ -2,6 +2,11 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <ctime>
+
+#include <sstream>
+
 #include "queue.h"
 #include "conversationManager.h"
 #include "organiser.h"

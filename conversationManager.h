@@ -15,9 +15,10 @@ class conversationManager {
 private:
     linkedList<std::string>* sLL;
     int numberFragment;
+    int conversationID;
 
 public:
-    conversationManager(); // Constructor
+    conversationManager(int convID); // Constructor
     ~conversationManager(); // Destructor
 
     int getNumFrag() const; // Getter for number of fragments

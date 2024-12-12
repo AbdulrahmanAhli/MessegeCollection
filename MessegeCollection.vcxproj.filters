@@ -30,9 +30,6 @@
     <ClCompile Include="emptyContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="queue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="message.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

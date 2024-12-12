@@ -17,12 +17,13 @@ private:
     int fragmentNumber;
     int conversationID;
     int reenqueueCount;
+    int priority;
     std::string messageContent;
 
 public:
     message(); // Default constructor
 
-    void setAll(int fragNum, int convID, const std::string& msgCont);
+    void setAll(int fragNum, int convID, const std::string& msgCont, int priorityLevel);
 
     // Getters
     int getFrag() const;
@@ -31,6 +32,8 @@ public:
 
     void incrementReenqueueCount();
     int getReenqueueCount() const;
+
+    int getPriority()const;
 
 };
 

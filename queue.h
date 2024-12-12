@@ -1,76 +1,94 @@
 #pragma once
 
-#include "linkedList.h"
-#include "linkedList.cpp"
+#include "node.h"
 
 template<typename T>
-class queue
-{
+class wQueue {
 public:
-	queue();
-	~queue();
+    wQueue();
+    ~wQueue();
 
-	int sizeQueue() const;
-	bool emptyQueue() const;
-	const T frontData()const throw(emptyContainer);
-	const T rearData()const throw(emptyContainer);
+    int sizeQueue() const;
+    bool emptyQueue() const;
+    const T frontData() const;
+    const T rearData() const;
 
-	void enqueue(const T newData); // to put thing is the q list
-	const T dequeue() throw(emptyContainer); // deleting and updating the list
-
+    void enqueue(const T newData, int priority);  // Enqueue with priority
+    const T dequeue();      // Dequeue the highest-priority element
 
 private:
-	linkedList<T>* qList; 
+    node<std::pair<T, int>>* head;  // Node with data and priority
+    int size;
 };
 
-// queue.cpp
 
-#include "queue.h"
-
-template <typename T>
-inline queue<T>::queue() { qList = new linkedList<T>(); } // Allocate memory for the linked list
+#include "emptyContainer.h"  // Custom exception class
 
 template <typename T>
-inline queue<T>::~queue() { delete qList; }
+wQueue<T>::wQueue() : head(nullptr), size(0) {}
 
 template <typename T>
-inline int queue<T>::sizeQueue() const {
-    return qList->sizeOfList(); // Use sizeOfList() from linkedList
-}
-
-template <typename T>
-bool queue<T>::emptyQueue() const {
-    return qList->emptyLinkedList(); // Use emptyLinkedList() from linkedList
-}
-
-template <typename T>
-inline const T queue<T>::frontData() const {
-    if (emptyQueue()) {
-        throw emptyContainer("The queue is empty\n");
+wQueue<T>::~wQueue() {
+    while (!emptyQueue()) {
+        dequeue();
     }
-    return qList->headData(); // Access head data from linkedList
 }
 
 template <typename T>
-inline const T queue<T>::rearData() const {
-    if (emptyQueue()) {
-        throw emptyContainer("The queue is empty\n");
+int wQueue<T>::sizeQueue() const {
+    return size;
+}
+
+template <typename T>
+bool wQueue<T>::emptyQueue() const {
+    return head == nullptr;
+}
+
+template <typename T>
+const T wQueue<T>::frontData() const {
+    if (emptyQueue()) throw emptyContainer("The queue is empty\n");
+    return head->nodeGetData().first;  // Return front element's data
+}
+
+template <typename T>
+const T wQueue<T>::rearData() const {
+    if (emptyQueue()) throw emptyContainer("The queue is empty\n");
+    node<std::pair<T, int>>* current = head;
+    while (current->next != nullptr) {
+        current = current->next;  // Traverse to the last node
     }
-    return qList->tailData(); // Access tail data from linkedList
+    return current->nodeGetData().first;
 }
 
 template <typename T>
-void queue<T>::enqueue(const T newData) {
-    qList->addBack(newData); // Add element at the back
+void wQueue<T>::enqueue(const T newData, int priority) {
+    auto* newNode = new node<std::pair<T, int>>({ newData, priority });
+
+    // If the queue is empty or the new node has higher priority
+    if (emptyQueue() || head->nodeGetData().second < priority) {
+        newNode->next = head;
+        head = newNode;
+    }
+    else {
+        // Traverse the list to find the correct insertion point
+        node<std::pair<T, int>>* current = head;
+        while (current->next != nullptr && current->next->nodeGetData().second >= priority) {
+            current = current->next;
+        }
+        newNode->next = current->next;
+        current->next = newNode;
+    }
+    size++;
 }
 
 template <typename T>
-inline const T queue<T>::dequeue() {
-    if (qList->emptyLinkedList()) throw emptyContainer("The queue is empty\n");
+const T wQueue<T>::dequeue() {
+    if (emptyQueue()) throw emptyContainer("The queue is empty\n");
 
-    T frontData = qList->headData(); // Store the front data
-    qList->removeFront();       // Remove the front element
-    return frontData;                // Return the stored data
-
-
+    node<std::pair<T, int>>* temp = head;
+    T data = head->nodeGetData().first;  // Extract the front data
+    head = head->next;  // Remove the front element
+    delete temp;
+    size--;
+    return data;
 }

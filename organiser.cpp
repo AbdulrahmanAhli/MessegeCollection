@@ -42,7 +42,7 @@ organiser::~organiser() {
     }
 }
 
-void organiser::addFragment(queue<message>* qList, int N) {
+void organiser::addFragment(wQueue<message>* qList, int N) {
     int convID, fragNumber, lengthMsg;
     int count = 0;
 
@@ -62,8 +62,9 @@ void organiser::addFragment(queue<message>* qList, int N) {
         }
 
         message msg;
-        msg.setAll(fragNumber, convID, text);
-        qList->enqueue(msg);
+        int priorityLevel = calculatePriority(msg);
+        msg.setAll(fragNumber, convID, text, priorityLevel);
+        qList->enqueue(msg, priorityLevel);
         ++count;
 
         // Debug output
@@ -76,7 +77,7 @@ void organiser::addFragment(queue<message>* qList, int N) {
 
 const int MAX_REENQUEUE_COUNT = 3; 
 
-void organiser::buildConvo(queue<message>* qList, conversationManager**& list, int& size) {
+void organiser::buildConvo(wQueue<message>* qList, conversationManager**& list, int& size) {
     int initialQueueSize = qList->sizeQueue();
     int processedFragments = 0;
 
@@ -110,7 +111,7 @@ void organiser::buildConvo(queue<message>* qList, conversationManager**& list, i
         else {
             currentMessage.incrementReenqueueCount();
             if (currentMessage.getReenqueueCount() <= MAX_REENQUEUE_COUNT) {
-                qList->enqueue(currentMessage);  // Re-enqueue the fragment
+                qList->enqueue(currentMessage,3);  // Re-enqueue the fragment
             }
             /*else {
                 std::cerr << "Discarding fragment " << currentMessage.getFrag()
@@ -230,3 +231,13 @@ std::string escapeCSV(const std::string& data) {
 }
 
 bool organiser::isFileEnd() const { return inputFile.eof(); }
+
+int organiser::calculatePriority(const message& msg) {
+    if (msg.getFrag() <= 5) return 1;  // High priority
+    if (msg.getFrag() <= 10) return 2; // Medium priority
+    return 3; // Low priority
+}
+
+void organiser::processFragments(wQueue<message>& qList, const message& msg) { qList.enqueue(msg, calculatePriority(msg)); }
+
+

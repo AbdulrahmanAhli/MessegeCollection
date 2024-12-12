@@ -24,10 +24,10 @@ public:
     ~organiser();
 
     // Adds a fragment to the queue
-    void addFragment(queue<message>* qList, int N);
+    void addFragment(wQueue<message>* qList, int N);
 
     // Builds conversations from the queue
-    void buildConvo(queue<message>* qList, conversationManager**& list, int& size);
+    void buildConvo(wQueue<message>* qList, conversationManager**& list, int& size);
 
     // Resizes the array of conversation managers
     void resizeArray(conversationManager**& listArray, int& size, int newSize);
@@ -36,6 +36,10 @@ public:
     void print(conversationManager* list[], int size);
 
     bool isFileEnd() const;
+
+    int calculatePriority(const message& msg);
+
+    void processFragments(wQueue<message>& qList, const message& msg);
 };
 
 #endif // ORGANISER_H

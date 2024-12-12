@@ -24,7 +24,7 @@ int main() {
     }
 
     // Create the message queue
-    queue<message>* qList = new queue<message>;
+    wQueue<message>* qList = new wQueue<message>;
 
     try {
         // Instantiate the organiser with input and output file names

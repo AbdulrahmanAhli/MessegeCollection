@@ -3,8 +3,6 @@ Fragment No.Message Content
 --------------------------------------------------------------
 1           1klqxgs4WpQf
 2           iTSEWYVXSXqlwdlRe06
-3           HT6fi
-4           lkCnBififtypky
 
 Conversation 2:
 Fragment No.Message Content
@@ -44,8 +42,6 @@ Fragment No.Message Content
 --------------------------------------------------------------
 1           TCKTrwnCe
 2           vNq6ld
-3           Tr7N8Ixdsfi870yV
-4           2S70dpiLvfkevITuSv
 
 Conversation 8:
 Fragment No.Message Content
